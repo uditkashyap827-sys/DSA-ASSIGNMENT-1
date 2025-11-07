@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <limits.h>  // For INT_MAX
+
+// Function to find second minimum value
+int findSecondMin(int arr[], int n) {
+    int firstMin = INT_MAX;
+    int secondMin = INT_MAX;
+
+    for(int i = 0; i < n; i++) {
+        if(arr[i] < firstMin) {
+            secondMin = firstMin;
+            firstMin = arr[i];
+        }
+        else if(arr[i] < secondMin && arr[i] != firstMin) {
+            secondMin = arr[i];
+        }
+    }
+
+    if(secondMin == INT_MAX)
+        return -1;  // Indicates no second minimum
+    else
+        return secondMin;
+}
+
+int main() {
+    int n;
+
+    // Input array size
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+
+    // Input elements
+    printf("Enter %d elements:\n", n);
+    for(int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Function call
+    int secondMin = findSecondMin(arr, n);
+
+    if(secondMin == -1)
+        printf("There is no second minimum (all elements are equal).\n");
+    else
+        printf("The second minimum value in the array is: %d\n", secondMin);
+
+    return 0;
+}
+
+
+
+//OUTPUT
+Enter the number of elements: 6
+Enter 6 elements:
+12 4 8 2 6 9
+The second minimum value in the array is: 4
